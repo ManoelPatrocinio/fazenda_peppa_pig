@@ -37,7 +37,7 @@ export class AuthService {
       }).pipe(
         tap(resData => {
           const expiracaoData = new Date(Date.now() + 24 * 60 * 60 * 1000);
-          
+
 
           const usuario = new Usuario(
             resData.email,
@@ -121,12 +121,30 @@ export class AuthService {
     localStorage.removeItem('userLoggedData');
   }
 
-  isAuthenticated(){
-     
-        return false
-      
-  
-  
-    
+  isAuthenticated() {
+
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+
+    } = JSON.parse(localStorage.getItem('userLoggedData') as string);
+    if (!userData) {
+      return false;
+    }
+
+    const loadedUser = new Usuario(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+    if (loadedUser.token) {
+      return true
+    } else {
+      return false
+    }
+
   }
 }
