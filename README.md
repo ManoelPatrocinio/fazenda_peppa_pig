@@ -26,7 +26,7 @@ o Listar pela data de saída;
 o Listar por sexo;
 o Listar por Status;
 
-## Controle de peso - status: Pendente
+## Controle de peso - status: Feito
 
 Crie um componente para monitorar o peso do animal. A
 ideia é mostrar um gráﬁco com as datas que o animal foi pesado com seu
@@ -43,7 +43,7 @@ cadastrado na aplicação;
 o Data da pesagem: dia / mês / ano e é requerido;
 o Peso em Kg: Aceita somente número e é requerido;
 
-## Ediçao de peso - status: Pendente
+## Ediçao de peso - status: Feito
 
 Crie um componente para poder editar o histórico dos pesos
 de um animal;

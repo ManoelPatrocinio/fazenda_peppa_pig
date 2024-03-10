@@ -27,7 +27,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signupUser(email: string, password: string) {
-    console.log("signupUser")
 
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCoW9pzfgT2Z47vy3NTR7RBy5ZsyhPSBP8',
       {
@@ -36,7 +35,9 @@ export class AuthService {
         returnSecureToken: true
       }).pipe(
         tap(resData => {
-          const expiracaoData = new Date(new Date().getTime() + +resData.expiresIn * 1000);
+          const expiracaoData = new Date(Date.now() + 24 * 60 * 60 * 1000);
+          
+
           const usuario = new Usuario(
             resData.email,
             resData.localId,
@@ -66,7 +67,7 @@ export class AuthService {
         returnSecureToken: true
       }).pipe(
         tap(resData => {
-          const expiracaoData = new Date(new Date().getTime() + +resData.expiresIn * 1000);
+          const expiracaoData = new Date(Date.now() + 24 * 60 * 60 * 1000);
           const usuario = new Usuario(
             resData.email,
             resData.localId,
@@ -117,10 +118,33 @@ export class AuthService {
   logout() {
     this.usuario.next(new Usuario('', '', '', new Date()));
     localStorage.removeItem('userLoggedData');
-
-
-
   }
 
-
+  isAuthenticated(){
+      const userData: {
+        email: string;
+        id: string;
+        _token: string;
+        _tokenExpirationDate: string;
+  
+      } = JSON.parse(localStorage.getItem('userLoggedData') as string);
+      if (!userData) {
+        return false;
+      }
+  
+      const loadedUser = new Usuario(
+        userData.email,
+        userData.id,
+        userData._token,
+        new Date(userData._tokenExpirationDate)
+      );
+      if (loadedUser.token) {
+        return true
+      }else{
+        return false
+      }
+  
+  
+    
+  }
 }

@@ -8,6 +8,9 @@ import { EdicaoSuinoComponent } from './pages/edicao-suino/edicao-suino.componen
 import { RegisterPesoComponent } from './pages/register-peso/register-peso.component';
 import { EditPesoComponent } from './pages/edit-peso/edit-peso.component';
 
+import { AuthGuard } from './auth-guard.guard';
+
+
 export const routes: Routes = [
     {path:"", component: HomeComponent},
     {path:"register-suino", component: CadastroSuinosComponent},

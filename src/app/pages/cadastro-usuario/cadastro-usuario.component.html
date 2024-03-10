@@ -24,7 +24,7 @@
         </div>
         <a routerLink="/login">Já tem uma conta ? <span>Acesse</span></a>
 
-        <button type="submit">Salvar</button>
+        <button type="submit" [disabled]="registerForm.invalid">Salvar</button>
     </form>
 
 </main>

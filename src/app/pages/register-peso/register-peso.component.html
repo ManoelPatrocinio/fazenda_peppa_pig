@@ -14,7 +14,7 @@
                     <span class="error_message"> Compo Obrigatório</span>
                 </div>
             </div>
-            
+
             <div class="input-group">
                 <label for="suinoPeso">Peso (kg)</label>
                 <input type="number" formControlName="suinoPeso" name="suinoPeso">
@@ -23,14 +23,21 @@
                 </div>
             </div>
         </div>
-        <button type="submit">Cadastrar</button>
+        <button type="submit" [disabled]="SuinoPesoForm.invalid">Cadastrar</button>
 
     </form>
 
-    <section>
+    <h4  *ngIf="suinopesoHistorico.length == 0">Informe algum registro para visualizar o histórico de pesos desse animal em gráfico e tabela</h4>
+    <div class="chart_container" *ngIf="pesos.length > 0">
         <h3>Histórico de pesos</h3>
+        <app-line-chart [datas]="datas" [pesos]="pesos"/>
+    </div>
 
-        <table  class="tabela">
+    <section *ngIf="suinopesoHistorico.length > 0">
+      
+        <h3>Tabela de companhamento</h3>
+
+        <table class="tabela">
             <thead>
                 <tr>
                     <th>Brinco</th>
@@ -42,18 +49,16 @@
             <tbody>
                 <tr *ngFor="let suino of suinopesoHistorico">
                     <td>{{suino.suinoBrinco}}</td>
-                    <td>{{suino.DataPesagem}}</td>
+                    <td>{{suino.DataPesagem | formatdate}}</td>
                     <td>{{suino.suinoPeso}} kg</td>
                     <td> <a routerLink="/edit-peso/{{suino.id}}"> Editar </a></td>
                 </tr>
-    
-             
+
+
             </tbody>
-            
+
         </table>
     </section>
-    
-    
 
-
+ 
 </main>

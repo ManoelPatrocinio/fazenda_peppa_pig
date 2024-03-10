@@ -87,17 +87,17 @@ button:disabled{
 }
 
 
-.error_message{
+.error_message,h4{
     color: #bd2828;
 }
 
 
-section, section h3{
+section, section, h3,h4{
     width: 100%;
     text-align: center;
     margin: 2rem 0 ;
 }
-section h3{
+h3{
     font-size: 1.3rem;
 }
 
@@ -113,3 +113,11 @@ section h3{
     background-color: #fff;
 
 }
+
+
+.chart_container{
+    width: 60%;
+    margin: 2rem 0 ;
+
+}
+

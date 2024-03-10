@@ -9,14 +9,14 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-edit-peso',
   standalone: true,
-  imports: [ReactiveFormsModule,NgIf,NgFor],
+  imports: [ReactiveFormsModule, NgIf, NgFor],
   templateUrl: './edit-peso.component.html',
   styleUrl: './edit-peso.component.css'
 })
 export class EditPesoComponent {
   SuinoPesoForm: FormGroup = new FormGroup({});
   suinoId: string = ""
-  suinaPesoData: type_suino_peso| null = null
+  suinaPesoData: type_suino_peso | null = null
 
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private rotas: Router, private rota: ActivatedRoute) { }
 
@@ -28,9 +28,9 @@ export class EditPesoComponent {
       'suinoPeso': [null, [Validators.required]],
     })
 
-  
+
     this.apiService.getPesoSuinoById(this.suinoId).subscribe((response) => {
-      this.suinaPesoData  = response;
+      this.suinaPesoData = response;
     })
 
     setTimeout(() => {
@@ -38,37 +38,34 @@ export class EditPesoComponent {
     }, 1000)
 
   }
-  setFormValues(){
-    console.log("this.suinaPesoData",this.suinaPesoData)
-  
+  setFormValues() {
+    console.log("this.suinaPesoData", this.suinaPesoData)
+
     if (this.suinaPesoData !== null) {
       this.SuinoPesoForm.setValue(this.suinaPesoData);
-      
+
     }
- 
+
   }
 
   onSubmit(form: FormGroup) {
-    // const DataPeso = {
-    //   ...form.value,
-    //   suinoBrinco: this.suinoId
-    // }
+    if (this.SuinoPesoForm.valid) {
 
-    console.log("form.value",form.value);
 
-    this.apiService.editarPesoSuino(this.suinoId ,form.value).subscribe(responseData => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sucesso!',
-        text: 'Peso atualizado com sucesso.',
-        timer: 2000,
-        showConfirmButton: false,
+      this.apiService.editarPesoSuino(this.suinoId, form.value).subscribe(responseData => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Peso atualizado com sucesso.',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          this.SuinoPesoForm.reset()
+          this.rotas.navigate([`/register-peso/${this.suinaPesoData!.suinoBrinco}`])
+
+        }, 2500)
       });
-      setTimeout(()=>{
-        this.SuinoPesoForm.reset()
-        this.rotas.navigate([`/register-peso/${this.suinaPesoData!.suinoBrinco}`])
-
-      },2500)
-    });
+    }
   }
 }

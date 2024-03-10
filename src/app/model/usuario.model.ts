@@ -10,6 +10,7 @@ export class Usuario{
 
     get token() {
         if(!this._tokenExpirationDate || new Date() > this._tokenExpirationDate){
+            console.log('Token is expirado');
             return null;
         }
         return this._token;

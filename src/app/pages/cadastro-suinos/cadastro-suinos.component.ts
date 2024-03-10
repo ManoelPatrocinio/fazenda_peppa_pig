@@ -10,12 +10,12 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-cadastro-suinos',
   standalone: true,
-  imports: [ReactiveFormsModule,NgIf],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './cadastro-suinos.component.html',
   styleUrl: './cadastro-suinos.component.css'
 })
 export class CadastroSuinosComponent {
-  registerSuinoForm: FormGroup= new FormGroup({});
+  registerSuinoForm: FormGroup = new FormGroup({});
 
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private rotas: Router) { }
 
@@ -31,17 +31,20 @@ export class CadastroSuinosComponent {
 
     })
   }
-  onSubmit(form:FormGroup) {
-    this.apiService.cadastroSuino(form.value).subscribe(responseData => {
-      console.log(responseData);
-      Swal.fire({
-        icon: 'success',
-        title: 'Sucesso!',
-        text: 'Suíno adicionado com sucesso.',
-        timer:2500,
-        showConfirmButton: false,
+  onSubmit(form: FormGroup) {
+    if (this.registerSuinoForm.valid) {
+
+      this.apiService.cadastroSuino(form.value).subscribe(responseData => {
+        console.log(responseData);
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Suíno adicionado com sucesso.',
+          timer: 2500,
+          showConfirmButton: false,
+        });
+        this.registerSuinoForm.reset()
       });
-      this.registerSuinoForm.reset()
-    });
+    }
   }
 }
