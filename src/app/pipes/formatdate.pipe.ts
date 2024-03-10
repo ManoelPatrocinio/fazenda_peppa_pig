@@ -11,6 +11,5 @@ export class FormatdatePipe implements PipeTransform {
     const datePipe = new DatePipe('en-US');
     return datePipe.transform(value, 'dd/MM/yyyy');
   }
-
 }
  

@@ -45,7 +45,10 @@
         <input type="date" formControlName="DataNascimento" name="DataNascimento">
         <div
           *ngIf="registerSuinoForm.get('DataNascimento')?.invalid &&  registerSuinoForm.get('DataNascimento')?.touched">
-          <span class="error_message"> Compo Obrigatório</span>
+          <span *ngIf="registerSuinoForm.get('DataNascimento')?.errors?.['required']" class="error_message"> Campo
+            obrigatório ! </span>
+          <span class="error_message" *ngIf="registerSuinoForm.get('DataNascimento')?.errors?.['invalidDate']"> Idade
+            maior que a data atual</span>
         </div>
       </div>
 

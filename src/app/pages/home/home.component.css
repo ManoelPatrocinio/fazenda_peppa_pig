@@ -1,0 +1,16 @@
+div{
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 15% 0 0 0;
+}
+
+div h2{
+    font-size: 2rem;
+    color: var(--Color-purple);
+}
+
+div h3{
+    font-size: 1.4rem;
+    color: #242424;
+}
