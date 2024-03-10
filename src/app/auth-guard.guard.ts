@@ -1,42 +1,41 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router,
+  CanActivateFn,
+} from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private authService: AuthService, private router: Router, private http: HttpClient) {}
-
-  canActivate(): boolean {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
     if (this.authService.isAuthenticated()) {
-      console.log("autenticado !")
       return true;
     } else {
-      console.error("não autenticado !")
-      this.router.navigate([""])
+      this.router.navigate(['/login']);
       return false;
     }
   }
 }
 
-
-// export class AuthGuard implements CanActivate {
-
-//   constructor(private http: HttpClient,private authService: AuthService, private router: Router) {}
-
-//   canActivate(): boolean {
-//     if(this.authService.isAuthenticated()){
-//       console.log("autenticado !")
-//       return true;
-//     }else{
-//       console.error("não autenticado !")
-//       this.router.navigate([""])
-//       return false
-//     }
-//   }
-// }
-
+export const canActivateGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  if (inject(AuthService).isAuthenticated()) {
+    return true;
+  } else {
+    inject(Router).navigate(['/login']); // Use inject(Router) to get the Router service
+    return false;
+  }
+};
 

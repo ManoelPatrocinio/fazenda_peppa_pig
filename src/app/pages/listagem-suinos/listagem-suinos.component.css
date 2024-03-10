@@ -37,4 +37,5 @@ app-filter-suinos{
     color: var(--Color-purple);
     background-color: transparent;
     margin-top: 1.5rem;
+    cursor: pointer;
 }

@@ -137,16 +137,7 @@ export class ApiService {
           });
           return throwError(error);
         })
-      ).subscribe(responseData => {
-        console.log(responseData);
-        Swal.fire({
-          icon: 'success',
-          title: 'Sucesso!',
-          text: 'Atendimento editado com sucesso.',
-          timer: 2500,
-          showConfirmButton: false,
-        });
-      });
+      )
   }
 
   // LOGICA PARA PESOS

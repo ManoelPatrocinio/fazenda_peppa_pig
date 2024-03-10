@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Usuario } from '../model/usuario.model';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -121,28 +122,9 @@ export class AuthService {
   }
 
   isAuthenticated(){
-      const userData: {
-        email: string;
-        id: string;
-        _token: string;
-        _tokenExpirationDate: string;
-  
-      } = JSON.parse(localStorage.getItem('userLoggedData') as string);
-      if (!userData) {
-        return false;
-      }
-  
-      const loadedUser = new Usuario(
-        userData.email,
-        userData.id,
-        userData._token,
-        new Date(userData._tokenExpirationDate)
-      );
-      if (loadedUser.token) {
-        return true
-      }else{
+     
         return false
-      }
+      
   
   
     

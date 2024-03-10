@@ -21,7 +21,6 @@ export class ListagemSuinosComponent {
 
   ngOnInit(){
     this.apiService.getListaSuinos().subscribe((datas)=>{
-      console.log(datas);
       this.listSuinos=datas;
       this.filtedlistSuinos = this.listSuinos;
     })
