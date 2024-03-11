@@ -14,6 +14,7 @@
   * Angular 17
   * TypeScript
   * Sweetalert 2
+  * Chart.Js
   * HTML5 
   * CSS3
   * JS
