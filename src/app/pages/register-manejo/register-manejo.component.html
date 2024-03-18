@@ -1,0 +1,16 @@
+<main>
+    <h2>Filtre os animais para o manejo</h2>
+    <p>Filtre os animais que deseja adicionar na sessão para manejo, ao final clique em AVANÇAR</p>
+
+
+    <app-filter-suinos [suinos]="listSuinos" (onFilteredSuinos)="filterList($event)"/>
+    <button id="btn_limpaFiltro"(click)="clearFilter()" >Limpar filtros</button>
+    <div class="card-wrapper">
+        <app-card-suino-detail 
+            *ngFor="let suino of filteredListSuinos" 
+            [suino]="suino" 
+            [CardType]="'manejo'" 
+            (selectSuino)="addSuinoToManejoList($event)" 
+        />
+    </div>
+</main>

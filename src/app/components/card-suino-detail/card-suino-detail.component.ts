@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { type_suino } from '../../types/type_suino';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -15,9 +15,15 @@ import { DateInMonthsPipe } from '../../pipes/date-in-months.pipe';
 })
 export class CardSuinoDetailComponent {
   @Input() suino:type_suino|null = null
+  @Input() CardType: ("normal" |"manejo")  = "normal"
+  @Output() selectSuino  = new EventEmitter<type_suino>();
 
-  constructor(private apiService:ApiService){}
+  constructor(private apiService:ApiService){
+  }
   deleteSuino(){
     this.apiService.deleteSuinoById(this.suino!.id!)
+  }
+  emitterEvent(suinoSelected:type_suino) {
+    this.selectSuino.emit(suinoSelected)
   }
 }
