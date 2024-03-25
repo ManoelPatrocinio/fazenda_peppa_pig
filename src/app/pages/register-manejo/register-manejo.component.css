@@ -1,4 +1,4 @@
-main {
+main,#table_section,#step2 {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -6,26 +6,13 @@ main {
     align-items: center;
     padding: 3%;
 }
-h2 {
-    width: 100%;
-    display: block;
-    font-size: 1.5rem;
-    color: #242424;
-    text-align: center;
-
-}
-p{
-    width: 100%;
-    text-align: center;
-    margin: 1rem  0 3rem 0 ;
-
-}
 
 #btn_limpaFiltro{
+    display: block;
     border: none;
     color: var(--Color-purple);
     background-color: transparent;
-    margin-top: 1.5rem;
+    margin: 2rem auto 0 auto;
     cursor: pointer;
 }
 
@@ -37,4 +24,43 @@ p{
     flex-wrap: wrap;
     gap: 2rem;
     margin-top: 2rem;
+}
+
+
+#table_section{
+    margin-top: 2rem;
+
+}
+.tabela{
+    width: 70%;
+    margin-top: 1.5rem;
+}
+.tabela, th, td{
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #cecece;
+    border-collapse:collapse;
+    background-color: #fff;
+
+}
+
+.tabela button{
+    color: var(--Color-purple);
+    font-weight: 500;
+}
+
+form{
+    width: 70%;
+}
+textarea {
+    resize: none;
+}
+
+#step2 h2{
+    margin-bottom: 2rem;
+}
+#step2 form p{
+    color: #242424;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }

@@ -9,6 +9,8 @@ import { RegisterPesoComponent } from './pages/register-peso/register-peso.compo
 import { EditPesoComponent } from './pages/edit-peso/edit-peso.component';
 import { AuthGuard,canActivateGuard } from './auth-guard.guard';
 import { RegisterManejoComponent } from './pages/register-manejo/register-manejo.component';
+import { ListManejoComponent } from './pages/list-manejo/list-manejo.component';
+import { ManegerManejoComponent } from './pages/maneger-manejo/maneger-manejo.component';
 
 /* foi apresentado o  error que não conseguir resolver ao usar o Guar canActivate:
     ERROR NullInjectorError: R3InjectorError(Environment Injector)[_AuthGuard -> _AuthService -> _HttpClient -> _HttpClient]: 
@@ -33,6 +35,7 @@ export const routes: Routes = [
     {path:"register", component: CadastroUsuarioComponent},
 
     {path:"register-manejo", component: RegisterManejoComponent},
-    {path:"list-manejo", component: RegisterManejoComponent},
+    {path:"list-manejo", component: ListManejoComponent},
+    {path:"menage-manejo", component: ManegerManejoComponent},
 
 ];
