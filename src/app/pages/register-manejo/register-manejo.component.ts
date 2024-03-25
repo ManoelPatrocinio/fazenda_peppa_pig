@@ -63,7 +63,7 @@ export class RegisterManejoComponent {
   }
 
   filterList(filter: { propriedade: keyof type_suino, valor: string }): void {
-    this.filteredListSuinos = this.listSuinos.filter(suino => suino[filter.propriedade] === filter.valor);
+    this.filteredListSuinos = this.listSuinos.filter(suino => suino[filter.propriedade] == filter.valor);
   }
 
   clearFilter(): void {
@@ -91,8 +91,8 @@ export class RegisterManejoComponent {
   }
 
   setAnimalAndAtividades() {
-    
-    if (this.listAnimaisAtividade.some( atv => atv.suinoBrinco === this.registerSectionForm.get("s_brincoAnimal")?.value) ) {
+
+    if (this.listAnimaisAtividade.some(atv => atv.suinoBrinco === this.registerSectionForm.get("s_brincoAnimal")?.value)) {
       Swal.fire({
         title: 'Error !',
         icon: 'error',
@@ -100,7 +100,7 @@ export class RegisterManejoComponent {
         showConfirmButton: true,
 
       })
-    }else{
+    } else {
       let newItem = {
         suinoBrinco: this.registerSectionForm.get("s_brincoAnimal")?.value,
         atividades: this.registerSectionForm.get("s_atividades")?.value.map((atv: any) => {
@@ -110,8 +110,8 @@ export class RegisterManejoComponent {
       this.listAnimaisAtividade.push(newItem);
       this.registerSectionForm.get("s_brincoAnimal")?.reset()
       this.registerSectionForm.get("s_atividades")?.reset()
-      console.log("this.listAnimaisAtividade",this.listAnimaisAtividade)
-    
+      console.log("this.listAnimaisAtividade", this.listAnimaisAtividade)
+
     }
 
   }
@@ -129,9 +129,9 @@ export class RegisterManejoComponent {
         showConfirmButton: false,
         timer: 1500
       })
-      setTimeout(()=>{
+      setTimeout(() => {
         window.location.reload();
-      },1700)
+      }, 1700)
     });
   }
   ngOnDestroy(): void {
