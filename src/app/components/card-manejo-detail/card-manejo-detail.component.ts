@@ -20,10 +20,8 @@ export class CardManejoDetailComponent {
   }
   deleteSuino(){
     console.log(this.sessao)
-    // this.apiService.deleteSuinoById(this.suino!.id!)
+    this.apiService.deleteSessaoById(this.sessao!.id!)
   }
-  emitterEvent(sessaoSelected:type_sessao) {
-    // this.selectSuino.emit(suinoSelected)
-  }
+
 
 }

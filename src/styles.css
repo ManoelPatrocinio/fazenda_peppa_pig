@@ -115,6 +115,7 @@ button{
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    flex-wrap: wrap;
     gap: 2rem;
 }
 .input-group{
@@ -140,6 +141,6 @@ button{
     color: #242424;
     padding: .5rem;
 
-    border: 1px solid #cecece;
+    border: 1px solid #cecece ;
     border-radius: 5px;
 }

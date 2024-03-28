@@ -36,6 +36,6 @@ export const routes: Routes = [
 
     {path:"register-manejo", component: RegisterManejoComponent},
     {path:"list-manejo", component: ListManejoComponent},
-    {path:"menage-manejo", component: ManegerManejoComponent},
+    {path:"menage-manejo/:id", component: ManegerManejoComponent},
 
 ];

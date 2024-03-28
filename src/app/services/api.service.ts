@@ -208,7 +208,7 @@ export class ApiService {
         Swal.fire({
           icon: 'error',
           title: 'Erro!',
-          text: 'Ocorreu um erro ao exlcuir o atendimento. Por favor, tente novamente.'
+          text: 'Ocorreu um erro ao excluir o atendimento. Por favor, tente novamente.'
         });
         return throwError(error);
       })
@@ -294,6 +294,68 @@ export class ApiService {
     )
 
   }
+  getSessaoById(sessaId:string) {
 
+    return this.http.get< type_sessao >(`https://residencia-b1914-default-rtdb.firebaseio.com/sessao/${sessaId}.json`,
+      {
+        params: new HttpParams().set('print', 'pretty')
+      }
+    ).pipe(
+      catchError(error => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Ocorreu um erro ao buscar a sessão por id. Por favor, tente novamente.'
+        });
+        return throwError(error);
+      }),
+      
+    )
+
+  }
+
+  deleteSessaoById(sessao_id: string) {
+    const url = `https://residencia-b1914-default-rtdb.firebaseio.com/sessao/${sessao_id}.json`;
+    this.http.delete(url).pipe(
+      catchError(error => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Ocorreu um erro ao excluir a sessão. Por favor, tente novamente.'
+        });
+        return throwError(error);
+      })
+    ).subscribe(responseData => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Sessão excluída com sucesso.',
+        timer: 2500,
+        showConfirmButton: false,
+
+      });
+      setTimeout(() => {
+
+        window.location.reload()
+      }, 3000)
+    });
+  }
+
+  editarSessao(id: string, newSessaoData: any) {
+    return this.http.put(`https://residencia-b1914-default-rtdb.firebaseio.com/sessao/${id}.json`, newSessaoData, { observe: 'response' })
+      .pipe(
+        catchError(error => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Ocorreu um erro ao editar a sessão. Por favor, tente novamente.'
+          });
+          return throwError(error);
+        })
+      )
+  }
 
 }
