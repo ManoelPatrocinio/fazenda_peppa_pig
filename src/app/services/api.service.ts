@@ -3,14 +3,17 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 import { type_suino, type_suino_peso } from '../types/type_suino';
-import { type_sessao } from '../types/type_sessao';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
+
+
   constructor(private http: HttpClient) { }
+
+
 
   cadastroSuino(newSuinoData: type_suino) {
 
@@ -33,6 +36,9 @@ export class ApiService {
       )
 
   }
+
+
+
   getListaSuinos() {
 
     return this.http.get<{ [key: string]: type_suino }>('https://residencia-b1914-default-rtdb.firebaseio.com/suinos.json',
@@ -60,6 +66,9 @@ export class ApiService {
     )
 
   }
+
+
+
   getSuinoById(suino_id: string) {
 
     return this.http.get<type_suino>(`https://residencia-b1914-default-rtdb.firebaseio.com/suinos/${suino_id}.json`,
@@ -79,6 +88,9 @@ export class ApiService {
     )
 
   }
+
+
+
 
   apagarTodaListaSuino() {
     return this.http.delete('https://residencia-b1914-default-rtdb.firebaseio.com/suinos.json');
@@ -148,6 +160,10 @@ export class ApiService {
         })
       )
   }
+
+
+
+
 
   getListPesoSuinos() {
 
@@ -228,6 +244,7 @@ export class ApiService {
     });
   }
 
+
   editarPesoSuino(id: string, newSuinoData: any) {
     return this.http.put(`https://residencia-b1914-default-rtdb.firebaseio.com/suinoPeso/${id}.json`, newSuinoData, { observe: 'response' })
       .pipe(
@@ -242,33 +259,9 @@ export class ApiService {
         })
       )
   }
+  getSessaoById(sessaId:string) {
 
-  // LÓGICA PARA SESSÃO
-  cadastroSessao(newSection: any) {
-
-    return this.http.post(
-      'https://residencia-b1914-default-rtdb.firebaseio.com/sessao.json',
-      newSection)
-      .pipe(
-        tap(resData => {
-          return resData
-        }),
-        catchError(error => {
-          console.error(error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Erro!',
-            text: 'Ocorreu um erro no cadastro da sessão. Por favor, tente novamente.'
-          });
-          return throwError(error);
-        })
-      )
-
-  }
-
-  getListSessoes() {
-
-    return this.http.get<{ [key: string]: type_sessao }>(`https://residencia-b1914-default-rtdb.firebaseio.com/sessao.json`,
+    return this.http.get< type_sessao >(`https://residencia-b1914-default-rtdb.firebaseio.com/sessao/${sessaId}.json`,
       {
         params: new HttpParams().set('print', 'pretty')
       }
@@ -278,22 +271,55 @@ export class ApiService {
         Swal.fire({
           icon: 'error',
           title: 'Erro!',
-          text: 'Ocorreu um erro ao buscar a lista de sessões. Por favor, tente novamente.'
+          text: 'Ocorreu um erro ao buscar a sessão por id. Por favor, tente novamente.'
         });
         return throwError(error);
       }),
-      map(responseData => {
-        // Convertendo o objeto de resposta em um array de objetos
-        if (responseData) {
-          return Object.keys(responseData).map(key => ({ id: key, ...responseData[key] }));
-        } else {
-          return [];
-        }
-
-      })
+      
     )
 
   }
 
+  deleteSessaoById(sessao_id: string) {
+    const url = `https://residencia-b1914-default-rtdb.firebaseio.com/sessao/${sessao_id}.json`;
+    this.http.delete(url).pipe(
+      catchError(error => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Ocorreu um erro ao excluir a sessão. Por favor, tente novamente.'
+        });
+        return throwError(error);
+      })
+    ).subscribe(responseData => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Sessão excluída com sucesso.',
+        timer: 2500,
+        showConfirmButton: false,
 
+      });
+      setTimeout(() => {
+
+        window.location.reload()
+      }, 3000)
+    });
+  }
+
+  editarSessao(id: string, newSessaoData: any) {
+    return this.http.put(`https://residencia-b1914-default-rtdb.firebaseio.com/sessao/${id}.json`, newSessaoData, { observe: 'response' })
+      .pipe(
+        catchError(error => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Ocorreu um erro ao editar a sessão. Por favor, tente novamente.'
+          });
+          return throwError(error);
+        })
+      )
+  }
 }
