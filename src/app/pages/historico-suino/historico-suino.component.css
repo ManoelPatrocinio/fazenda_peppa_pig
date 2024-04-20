@@ -1,0 +1,34 @@
+#select_suino_brinco{
+  width: 50% !important;
+}
+
+
+section, section, h3,h4{
+  width: 100%;
+  text-align: center;
+  margin: 2rem 0 ;
+}
+h3{
+  font-size: 1.3rem;
+}
+
+.tabela{
+  width: 50%;
+  margin: 0 auto;
+}
+.tabela, th, td{
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #cecece;
+  border-collapse:collapse;
+  background-color: #fff;
+
+}
+
+
+.chart_container{
+  width: 60%;
+  margin: 2rem 0 ;
+
+}
+

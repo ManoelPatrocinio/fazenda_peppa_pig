@@ -16,6 +16,7 @@ export const routes: Routes = [
     {path:"", component: HomeComponent},
     {path:"register-suino", loadComponent: ()=> import('./pages/cadastro-suinos/cadastro-suinos.component').then((c) => c.CadastroSuinosComponent) },
     {path:"list-suino", loadComponent: ()=> import('./pages/listagem-suinos/listagem-suinos.component').then((c) => c.ListagemSuinosComponent) },
+    {path:"historic-suino", loadComponent: ()=> import('./pages/historico-suino/historico-suino.component').then((c) => c.HistoricoSuinoComponent) },
     {path:"edit-suino/:id", loadComponent: ()=> import('./pages/edicao-suino/edicao-suino.component').then((c) => c.EdicaoSuinoComponent) },
 
     {path:"register-peso/:id", loadComponent: ()=> import('./pages/register-peso/register-peso.component').then((c) => c.RegisterPesoComponent) },
