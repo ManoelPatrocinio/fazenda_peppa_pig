@@ -2,40 +2,62 @@
   <h1 class="section_title">Histórico Do Suíno</h1>
   <p class="section_title__text"> Escolha o brindo do animal que deseja visualizar o histórico de atividades</p>
 
- 
+
   <div class="input-group" id="select_suino_brinco">
-    <label for="s_date">Brinco do  suíno: </label>
-    <select  (change)="SetSuinoSelected($event)" >
+    <label for="s_date">Brinco do suíno: </label>
+    <select (change)="SetSuinoSelected($event)">
       <option value="" disabled selected>Selecione </option>
-      <option *ngFor="let suino of listaSuinos" [value]="suino.id" >{{ suino.Brinco }}</option>
+      <option *ngFor="let suino of listaSuinos" [value]="suino.id">{{ suino.Brinco }}</option>
     </select>
   </div>
 
 
   <section *ngIf="historico.length > 0">
-      
+
     <h3>Histórico do suíno</h3>
 
     <table class="tabela">
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>atividades</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of historico">
-                <td>{{item.data | formatdate}}</td>
-                <td>{{item.atividade }}</td>
-                <td>{{item.detalhe}}</td>
-            </tr>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>atividades</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of historico">
+          <td>{{item.data | formatdate}}</td>
+          <td>{{item.atividade }}</td>
+          <td>{{item.detalhe}}</td>
+        </tr>
 
 
-        </tbody>
+      </tbody>
 
     </table>
-</section>
+  </section>
+  <p *ngIf="noData " style="font-size: 1.3rem; margin-top: 2rem;"> Suíno sem histórico </p>
 
+  <div style="display: flex; justify-content: center; gap: 2rem;">
 
+    <button *ngIf="suinopesoHistorico.length > 0" (click)="formatDatasToChart()" class="btn_primary" style="flex: 1;">
+      Ver Gráfico de peso</button>
+    <button *ngIf="suinopesoHistorico.length > 0" 
+      (click)="formatDatasToChartBar()" 
+      class="btn_primary"
+      style="flex: 1;"
+    > 
+      Ver Gráfico de Atividades
+    </button>
+  </div>
+
+  <div class="chart_container" *ngIf="pesos.length > 0" style="margin-top: 2rem;">
+    <h3>Histórico de pesos</h3>
+    <app-line-chart [datas]="datas" [pesos]="pesos" />
+  </div>
+
+  <div class="chart_container" *ngIf="historicoAtividades.length > 0" style="margin-top: 2rem;">
+    <h3>Histórico de atividades</h3>
+    <app-bar-chart [datas]="historicoAtividades" />
+  </div>
 </main>
